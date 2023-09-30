@@ -1,8 +1,15 @@
 from ultralytics import YOLO
 import cv2
+import numpy as np
+import math
+import time
+import matplotlib.pyplot as plt
+from PIL import Image
+
 
 
 model = YOLO("yolov8l.pt")  # yolov5s.pt
+
 #the models are from worst to best 
 #yolov5s.pt
 #yolov5m.pt
@@ -29,38 +36,61 @@ approach_threshold = 1.0  # Adjust as needed
 
 # Capture video from a source (e.g., camera)
 # Replace with your video source (e.g., camera or video file)
-video_source = "http://192.168.100.114:4747/video"
+#video_source = "http://192.168.100.114:4747/video"
 #video_source = 0
+#video_source = "s.jpg"
+video_source = "http://10.43.97.210:4747/video"
+
+#cap = cv2.VideoCapture(video_source)
+    
 
 # Continuously process frames from the video source
-while True:
-    # Capture a frame from the video source
-    print("here")
-    results = model.predict(source=video_source, save=False, save_txt=False, save_conf=False, save_crop=False, stream=True,show = True)
+#while True:
+# Capture a frame from the video source
+print("here")
+#, save=False
 
-    
-    # Process results generator
-    for result in results:
-        boxes = result.boxes  # Boxes object for bbox outputs
-        keypoints = result.keypoints  # Keypoints object for pose outputs
-        probs = result.probs  # Probs object for classification outputs
-        masks = result.masks  # Masks object for segmentation masks outputs
-        # Check if the calculated distance is less than the approach threshold
-    
-    approaching = distance_to_bottle < approach_threshold
+results = model.predict(source=video_source, save_txt=False, save_conf=False, save_crop=False,show = True)
+boxes = results[0].boxes  #
+box = boxes[0]
+box.xyxy
+print(box.xyxy)
+
+#La idea es que desde aqui equipemos la idea para poder estar tomando screenshots constantes de la camara y poder analizarlas, asi con la retroalimentacion
+#constante podremos tomar mejores decisiones de si se acerca o no a la botella
 
 
-    # Print the result (you can replace this with your desired action)
-    if approaching:
-        print("Approaching the bottle!")
-    else:
-        print("Not approaching the bottle.")
+
+
+#how do i limit the number of pixels
+
+#results = model.track(source="https://youtu.be/LNwODJXcvt4", save_txt=False, save_conf=False, stream=True,show = True)
+#results = model.track(source="https://youtu.be/LNwODJXcvt4", show=True)  # Tracking with default tracker
+
+
+
+# Process results generator
+#for result in results:
+    #boxes = result.boxes  # Boxes object for bbox outputs
+    #keypoints = result.keypoints  # Keypoints object for pose outputs
+    #probs = result.probs  # Probs object for classification outputs
+    #masks = result.masks  # Masks object for segmentation masks outputs
+    # Check if the calculated distance is less than the approach threshold
+
+#approaching = distance_to_bottle < approach_threshold
+
+
+# Print the result (you can replace this with your desired action)
+#if approaching:
+#    print("Approaching the bottle!")
+#else:
+#    print("Not approaching the bottle.")
 
 # Break the loop if needed (e.g., press a key to exit)
     # Add your exit condition here
 
 # Release resources when done
-model.close()
+#model.close()
 
 #, conf=0.25
 #model.export(format="onnx", dynamic=False, simplify=False)
