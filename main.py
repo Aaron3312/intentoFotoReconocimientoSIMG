@@ -39,7 +39,7 @@ approach_threshold = 1.0  # Adjust as needed
 #video_source = "http://192.168.100.114:4747/video"
 #video_source = 0
 #video_source = "s.jpg"
-video_source = "http://10.43.97.210:4747/video"
+video_source = "rtsp://192.168.42.1/live"
 
 #cap = cv2.VideoCapture(video_source)
     
@@ -52,9 +52,10 @@ print("here")
 
 results = model.predict(source=video_source, save_txt=False, save_conf=False, save_crop=False,show = True)
 boxes = results[0].boxes  #
+
 box = boxes[0]
 box.xyxy
-print(box.xyxy)
+print(box)
 
 #La idea es que desde aqui equipemos la idea para poder estar tomando screenshots constantes de la camara y poder analizarlas, asi con la retroalimentacion
 #constante podremos tomar mejores decisiones de si se acerca o no a la botella
@@ -75,7 +76,7 @@ print(box.xyxy)
     #keypoints = result.keypoints  # Keypoints object for pose outputs
     #probs = result.probs  # Probs object for classification outputs
     #masks = result.masks  # Masks object for segmentation masks outputs
-    # Check if the calculated distance is less than the approach threshold
+    # Check if the calculated distanc e is less than the approach threshold
 
 #approaching = distance_to_bottle < approach_threshold
 
