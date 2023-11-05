@@ -1,0 +1,67 @@
+from tkinter import *
+import socket
+from ultralytics import YOLO
+import cv2
+import numpy as np
+import math
+import time
+import matplotlib.pyplot as plt
+from PIL import Image
+
+
+ESP_IP = "192.168.168.20"
+
+ESP_PORT = 8266
+
+#things for the IA of yolov5
+model = YOLO("yolov8l.pt")  # yolov5s.pt
+distance_to_bottle = 2.0  # Placeholder value in meters
+
+# Define a threshold distance for approaching the bottle
+approach_threshold = 1.0  # Adjust as needed
+
+#video_source = "http://10.43.97.210:4747/video"
+video_source = "http://192.168.100.114:4747/video"
+
+
+# Capture a frame from the video source
+print("here")
+#, save=False
+
+results = model.predict(source=video_source, save_txt=False, save_conf=False, save_crop=False,show = True)
+boxes = results[0].boxes  #
+
+box = boxes[0]
+box.xyxy
+print(box)
+
+#END of things for the IA of yolov5
+
+#things for the control of the car with the keyboard
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+def key_pressed(c):
+    print("Tecla presionada: ", c.char)
+    s.send(c.char.encode())
+def key_released(c):
+    print("Tecla liberada: ", c.char)
+    s.send(c.char.encode())
+
+
+root = Tk()
+root.title("Control de Carro")
+
+frame = Frame(root)
+
+lbl_title = Label(frame, text="Control de Carro ROBOT")
+lbl_title.grid(row=0, column=0, pady=10, padx=10)
+
+frame.bind ("<KeyPress>", key_pressed)
+frame.bind ("<KeyRelease>", key_released)
+
+s.connect((ESP_IP, ESP_PORT))
+
+frame.pack()
+frame.focus_set()
+
+root.mainloop()

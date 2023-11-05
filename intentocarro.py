@@ -1,7 +1,7 @@
 from tkinter import *
 import socket
 
-ESP_IP = "192.168.100.191"
+ESP_IP = "192.168.168.20"
 
 ESP_PORT = 8266
 
@@ -32,3 +32,9 @@ frame.pack()
 frame.focus_set()
 
 root.mainloop()
+
+# TO RUN THIS SHITTY CODE USE THIS IN PYTHON TERMINAL, and the other in visual terminal dont care
+ #exec(open("E:\ProgramProyects\intentoFotoReconocimientoSIMG\intentocarro.py").read())
+ # i dont care bout the other one its a shit
+ # + need to make the other code of the arm to be able to run in this terminal cause this its a shit
+ 

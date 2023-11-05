@@ -40,7 +40,9 @@ approach_threshold = 1.0  # Adjust as needed
 #video_source = 0
 #video_source = "s.jpg"
 #video_source = "rtsp://192.168.42.1/live"
-video_source = "http://10.43.97.210:4747/video"
+#video_source = "http://10.43.97.210:4747/video"
+video_source = "http://192.168.100.114:4747/video"
+
 
 #cap = cv2.VideoCapture(video_source)
     
@@ -100,6 +102,7 @@ print(box)
 #model.export(format="coreml", dynamic=False, simplify=False)
 #model.export(format="tflite", dynamic=False, simplify=False)
 #model.export(format="openvino", dynamic=False, simplify=False)
+
 
 
 
