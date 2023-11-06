@@ -53,12 +53,20 @@ video_source = "http://192.168.100.114:4747/video"
 print("here")
 #, save=False
 
-results = model.predict(source=video_source, save_txt=False, save_conf=False, save_crop=False,show = True)
-boxes = results[0].boxes  #
 
-box = boxes[0]
-box.xyxy
-print(box)
+
+
+results = model.predict(source=video_source, save_txt=False, save_conf=False, save_crop=False, show = True )
+
+
+#boxes = results[0].boxes  
+print("sed")
+#cord = results.xyxyn[0][:, -1].numpy(), results.xyxyn[0][:, :-1].numpy()
+#box = boxes[0]
+#box.xyxy
+#print(labels, cord)
+
+
 
 #La idea es que desde aqui equipemos la idea para poder estar tomando screenshots constantes de la camara y poder analizarlas, asi con la retroalimentacion
 #constante podremos tomar mejores decisiones de si se acerca o no a la botella
